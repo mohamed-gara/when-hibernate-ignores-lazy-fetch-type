@@ -11,7 +11,7 @@ public class OneToOneInverseSideTestCase extends EntityLoadingTestCase {
     private static final int WIFE_ID    = 2;
 
     private static final String WIFE_NAME    = "Yasmine";
-    private static final String HUSBAND_NAME = "Yasine";
+    private static final String HUSBAND_NAME = "Yacine";
 
     @Override
     protected Class<?> entityClass() {

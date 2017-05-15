@@ -14,7 +14,7 @@ public class JoinFetchTestCase extends EntityLoadingTestCase {
     private static final int PERSON_ID = 3;
 
     private static final String MOTHER_NAME = "Yasmine";
-    private static final String FATHER_NAME = "Yasine";
+    private static final String FATHER_NAME = "Yacine";
     private static final String PERSON_NAME = "Ali";
 
     @Override
