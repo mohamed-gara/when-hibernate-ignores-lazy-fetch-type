@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>orm.hibernate</groupId>
-	<artifactId>when-hibernate-ignore-fetch-type</artifactId>
+	<artifactId>when-hibernate-ignore-lazy-fetch-type</artifactId>
 	<version>1.0.0</version>
 	<name></name>
 
@@ -63,23 +63,12 @@
 		</dependency>
 
 		<dependency>
-			<groupId>javax.transaction</groupId>
-			<artifactId>jta</artifactId>
-			<version>1.1</version>
-		</dependency>
-
-		<dependency>
 			<groupId>com.ninja-squad</groupId>
 			<artifactId>DbSetup</artifactId>
 			<version>${db-setup}</version>
 			<scope>test</scope>
 		</dependency>
 
-		<dependency>
-			<groupId>org.reflections</groupId>
-			<artifactId>reflections</artifactId>
-			<version>${reflections}</version>
-		</dependency>
 	</dependencies>
 
 	<build>
