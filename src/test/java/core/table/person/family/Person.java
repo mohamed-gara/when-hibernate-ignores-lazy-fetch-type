@@ -1,11 +1,11 @@
-package case4;
+package core.table.person.family;
 
 import lombok.Data;
-import org.hibernate.annotations.NotFound;
-import org.hibernate.annotations.NotFoundAction;
 
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import java.util.List;
 
 import static javax.persistence.FetchType.LAZY;
 
@@ -14,11 +14,15 @@ import static javax.persistence.FetchType.LAZY;
 public class Person extends core.Person {
 
     @ManyToOne(fetch = LAZY)
-    @NotFound(action = NotFoundAction.IGNORE)
     private Person mother;
 
     @ManyToOne(fetch = LAZY)
-    @NotFound(action = NotFoundAction.EXCEPTION)
     private Person father;
+
+    @OneToMany(mappedBy = "father")
+    private List<Person> children;
+
+    //@OneToMany(mappedBy = "mother")
+    //private List<Person> children;
 
 }

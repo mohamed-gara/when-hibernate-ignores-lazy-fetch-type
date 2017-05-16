@@ -5,6 +5,10 @@ import com.ninja_squad.dbsetup.destination.Destination;
 import com.ninja_squad.dbsetup.destination.DriverManagerDestination;
 import com.ninja_squad.dbsetup.operation.Insert;
 import com.ninja_squad.dbsetup.operation.Operation;
+import core.assertion.LoadedEntityAssertions;
+import core.hiberante.SingleClassScanner;
+import core.table.Data;
+import core.table.EntityTable;
 import org.junit.After;
 import org.junit.Before;
 
@@ -25,11 +29,15 @@ public abstract class EntityLoadingTestCase {
     private static final String TEST_DB_USER = "sa";
     private static final String TEST_DB_PASSWORD = "";
 
+    private EntityTable entityTable;
+
     protected EntityManager entityManager;
     protected PersistenceUnitUtil puUtil;
 
     @Before
-    public void init() {
+    public void init() throws Exception {
+
+        instantiateEntityTable();
 
         EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("default", properties());
         entityManager = entityManagerFactory.createEntityManager();
@@ -37,6 +45,8 @@ public abstract class EntityLoadingTestCase {
 
         DbSetup dbSetup = new DbSetup(destination(), operations());
         dbSetup.launch();
+
+
     }
 
     @After
@@ -44,17 +54,23 @@ public abstract class EntityLoadingTestCase {
         entityManager.getEntityManagerFactory().close();
     }
 
-    protected abstract Class<?> entityClass();
+    private void instantiateEntityTable() {
 
-    protected abstract String[] columns();
+        Data data = this.getClass().getAnnotation(Data.class);
+        Class tableClass = data.value();
 
-    protected abstract Object[][] rows();
+        try {
+            entityTable = (EntityTable) tableClass.newInstance();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     private Map<String, Object> properties() {
 
         Map<String, Object> properties = new HashMap<>();
 
-        properties.put(SCANNER          , new SingleClassScanner(entityClass()));
+        properties.put(SCANNER          , new SingleClassScanner(entityTable.entityClass()));
         properties.put(JPA_JDBC_URL     , TEST_DB_URL);
         properties.put(JPA_JDBC_USER    , TEST_DB_USER);
         properties.put(JPA_JDBC_PASSWORD, TEST_DB_PASSWORD);
@@ -68,20 +84,16 @@ public abstract class EntityLoadingTestCase {
 
     private Operation operations() {
 
-        Insert.Builder insertOperationBuilder = insertInto(table())
-                                                    .columns(columns());
+        Insert.Builder insertOperationBuilder = insertInto(entityTable.name())
+                                                    .columns(entityTable.columns());
 
-        asList(rows())
+        asList(entityTable.rows())
             .forEach(insertOperationBuilder::values);
 
         return sequenceOf(
-                          deleteAllFrom(table()),
+                          deleteAllFrom(entityTable.name()),
                           insertOperationBuilder.build()
                          );
-    }
-
-    private String table() {
-        return entityClass().getSimpleName();
     }
 
     protected String quote(String string) {

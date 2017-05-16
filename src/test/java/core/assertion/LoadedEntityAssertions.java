@@ -1,4 +1,4 @@
-package core;
+package core.assertion;
 
 import javax.persistence.PersistenceUnitUtil;
 
@@ -9,7 +9,7 @@ public class LoadedEntityAssertions<T> {
     private T loadedEntity;
     private PersistenceUnitUtil puUtil;
 
-    LoadedEntityAssertions(T entity, PersistenceUnitUtil puUtil) {
+    public LoadedEntityAssertions(T entity, PersistenceUnitUtil puUtil) {
         this.loadedEntity = entity;
         this.puUtil =  puUtil;
     }

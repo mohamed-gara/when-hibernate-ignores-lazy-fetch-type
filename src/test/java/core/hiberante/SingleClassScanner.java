@@ -1,4 +1,4 @@
-package core;
+package core.hiberante;
 
 import org.hibernate.boot.archive.internal.FileInputStreamAccess;
 import org.hibernate.boot.archive.scan.internal.ClassDescriptorImpl;
@@ -8,7 +8,7 @@ import org.hibernate.boot.archive.scan.spi.*;
 import java.io.File;
 
 
-class SingleClassScanner implements Scanner {
+public class SingleClassScanner implements Scanner {
 
     private Class<?> entityClass;
 

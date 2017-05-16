@@ -1,4 +1,4 @@
-package case8;
+package core.table.person.parentAndFriends;
 
 import lombok.Data;
 import org.hibernate.annotations.Fetch;

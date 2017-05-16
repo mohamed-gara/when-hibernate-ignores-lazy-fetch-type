@@ -1,43 +1,18 @@
 package case5;
 
 import core.EntityLoadingTestCase;
+import core.table.Data;
+import core.table.person.family.FamilyEntityTable;
+import core.table.person.family.Person;
 import org.junit.Test;
 
 import javax.persistence.TypedQuery;
 
+import static core.table.person.family.FamilyEntityTable.CHILD_NAME;
+import static core.table.person.family.FamilyEntityTable.MOTHER_NAME;
+
+@Data(FamilyEntityTable.class)
 public class QueryTestCase extends EntityLoadingTestCase {
-
-    private static String[] COLUMNS = {"ID", "NAME", "MOTHER_ID", "FATHER_ID"};
-
-    private static final int MOTHER_ID = 1;
-    private static final int FATHER_ID = 2;
-    private static final int PERSON_ID = 3;
-    private static final int CHILD_ID  = 4;
-
-    private static final String MOTHER_NAME = "Yasmine";
-    private static final String FATHER_NAME = "Yacine";
-    private static final String PERSON_NAME = "Ali";
-    private static final String CHILD_NAME  = "Kimo";
-
-    @Override
-    protected Class<?> entityClass() {
-        return Person.class;
-    }
-
-    @Override
-    protected String[] columns(){
-        return COLUMNS;
-    }
-
-    @Override
-    protected Object[][] rows(){
-        return new Object[][]{
-            {MOTHER_ID, MOTHER_NAME, null     , null     },
-            {FATHER_ID, FATHER_NAME, null     , null     },
-            {PERSON_ID, PERSON_NAME, MOTHER_ID, FATHER_ID},
-            {CHILD_ID , CHILD_NAME , null     , PERSON_ID}
-        };
-    }
 
     @Test
     public void query() throws Exception {

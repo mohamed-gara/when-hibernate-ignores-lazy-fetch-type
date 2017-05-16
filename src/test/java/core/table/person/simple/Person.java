@@ -1,4 +1,4 @@
-package case1;
+package core.table.person.simple;
 
 import lombok.Data;
 

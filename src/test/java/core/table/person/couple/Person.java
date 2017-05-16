@@ -1,4 +1,4 @@
-package case2;
+package core.table.person.couple;
 
 import lombok.Data;
 

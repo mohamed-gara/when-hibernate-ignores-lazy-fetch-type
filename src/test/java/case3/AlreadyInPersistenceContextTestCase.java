@@ -1,35 +1,16 @@
 package case3;
 
 import core.EntityLoadingTestCase;
+import core.table.Data;
+import core.table.person.couple.CoupleEntityTable;
+import core.table.person.couple.Person;
 import org.junit.Test;
 
+import static core.table.person.couple.CoupleEntityTable.HUSBAND_ID;
+import static core.table.person.couple.CoupleEntityTable.WIFE_ID;
+
+@Data(CoupleEntityTable.class)
 public class AlreadyInPersistenceContextTestCase extends EntityLoadingTestCase {
-
-    private static final String[] COLUMNS = {"ID", "NAME", "WIFE_ID"};
-
-    private static final int HUSBAND_ID = 1;
-    private static final int WIFE_ID    = 2;
-
-    private static final String WIFE_NAME    = "Yasmine";
-    private static final String HUSBAND_NAME = "Yacine";
-
-    @Override
-    protected Class<?> entityClass() {
-        return Person.class;
-    }
-
-    @Override
-    protected String[] columns(){
-        return COLUMNS;
-    }
-
-    @Override
-    protected Object[][] rows(){
-        return new Object[][]{
-            {WIFE_ID   , WIFE_NAME   , null   },
-            {HUSBAND_ID, HUSBAND_NAME, WIFE_ID}
-        };
-    }
 
     @Test
     public void lazyLoaded() throws Exception {
