@@ -4,8 +4,7 @@ In many situation, when using an ORM tool, lazy loading is a real effective opti
 
 The JPA specification states clearly that:
 
-> **The LAZY strategy is a hint of the persistence provider run time that data should be fetched lazily when it is first accessed. The implementation is permitted to eagerly fetch data for which the LAZY strategy hint has been specified.**
-- JSR 338 p.429
+> **The LAZY strategy is a hint of the persistence provider run time that data should be fetched lazily when it is first accessed. The implementation is permitted to eagerly fetch data for which the LAZY strategy hint has been specified.** (JSR 338 - p.429)
 
 So, it's important to know the cases in which the provider ignores the lazy fetch type and eagerly loads the associated entities. This allows us to avoid some unexpected eager load and unexplained performance problems.
 
@@ -20,6 +19,6 @@ In PoEAA, the authors presented four patterns to implement Lazy Loading:
 * Value Holder
 * Ghost
 
-## When lazy fetch type is is not applied
+## When lazy fetch type is not applied
 
 ## Conclusion
