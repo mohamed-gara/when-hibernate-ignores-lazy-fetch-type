@@ -21,4 +21,11 @@ In PoEAA, the authors presented four patterns to implement Lazy Loading:
 
 ## When lazy fetch type is not applied
 
-## Conclusion
+* Case 1: basic attribute
+* Case 2: One To One reverse side
+* Case 3: already in the persistence context
+* Case 4: @NotFound annotation
+* Case 5: query
+* Case 6: join fetch
+* Case 7: graph entity
+* Case 8: fetch mode
